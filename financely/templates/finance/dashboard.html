@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %} 
+
+{% block content %}
+{% include 'finance/navbar.html' %}
+
+<div class="ml-20 mr-20 mt-10">
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button class="bg-[#79E684] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit'>Filter</button>
+    </form>
+
+    <canvas id="myChart" width="800" height="400"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const data = {{ dashboard_data | safe }}
+        new Chart(
+            document.getElementById('myChart'),
+            {
+                type: 'bar',
+                data: data,
+                options: {
+                    barValueSpacing: 20,
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                        min: 0,
+                        }
+                    }]}}
+            }
+        );
+    </script>
+</div>
+{% endblock %}

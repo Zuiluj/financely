@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Accounts {% endblock %}
+
+{% block content %}
+{% include 'finance/navbar.html' %}
+<a href="/accounts/add_account">
+    <button type="button" class="
+    bg-[#79E684] rounded-lg p-4
+    fixed z-90 bottom-10 right-8
+    hover:bg-[#F8F8F8] transition-opacity">
+        Add New Account
+    </button>
+</a>
+{% load humanize %}
+<div class="ml-20 mr-20">
+    {% for acc in accounts %}
+        <a href="/accounts/{{acc.id}}/records" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 m-5">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{acc.name}}</h5>
+            <p class="font-medium text-teal-700">
+                {{acc.type | capfirst }}
+            </p>
+            <p class="font-light text-gray-700">
+                ₱ {{ acc.balance | intcomma }}
+            </p>
+            <p class="font-normal text-gray-700">
+                {{acc.desc}}
+            </p>
+        </a>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

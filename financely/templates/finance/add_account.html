@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Add Account {% endblock %} 
+
+{% block content %}
+{% include 'finance/navbar.html' %}
+
+<div class="ml-20 mr-20">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button style='margin-top:10px;' type='submit' >Create Account</button>
+    </form>
+</div>
+
+{% endblock %}
